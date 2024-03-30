@@ -5,8 +5,11 @@ const app = require("./db");
 exports.getTasks = async (req, res) => {
     try {
       // connectDB();
-      const tasks = await Task.find().then(Tasks=>res.json(Tasks))
-      .catch(error => res.json(err)); 
+      const tasks = await Task.find({isComplete:false});
+      console.log(tasks);
+      console.log(Task);
+      res.json(tasks);
+      
     
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -15,17 +18,16 @@ exports.getTasks = async (req, res) => {
 
 exports.addTask = async (req, res) => {
     const task = new Task({
-     
+      name : req.body.name,
       description : req.body.description,
       priority  : req.body.priority,
       startDate : req.body.startDate,
       endDate : req.body.endDate,
       isComplete: req.body.isComplete,
       creationDate: req.body.creationDate,
-      taskId: req.body.taskId
     });  
   try {
-    connectDB();
+    
     const newTask = await task.save();
     res.status(201).json(newTask);
   } catch (error) {
@@ -44,15 +46,14 @@ exports.addTask = async (req, res) => {
 //   };
 
   exports.getTaskById = async (req, res) => {
-    const taskId = req.params.id;
+    // console.log(req.params.id)
   
     try {
-      connectDB();
-      const task = await Task.findOne({ _id: _id });
+      const task = await Task.findById( req.params.id );
       if (!task) {
         return res.status(404).json({ message: 'Task not found' });
       }
-      res.json(expense);
+      res.json(task);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -62,8 +63,7 @@ exports.addTask = async (req, res) => {
    
   
     try {
-      connectDB();
-      const task = await Task.find({ isComplete : true });
+      const task = await Task.find({ isComplete : true }).sort({ creationDate: -1 });
       if (!task) {
         return res.status(404).json({ message: 'Task not found' });
       }
@@ -74,10 +74,10 @@ exports.addTask = async (req, res) => {
   };
 
   exports.deleteTaskByTaskId = async (req, res) => {
-    const taskId = req.params.taskId;
+    const id = req.params.id;
     try {
-      connectDB();
-      const task = await Expense.findOneAndDelete({ _id });
+      
+      const task = await Task.findByIdAndDelete(id);
       if (!task) {
         return res.status(404).json({ message: 'Task not found' });
       }
@@ -88,11 +88,11 @@ exports.addTask = async (req, res) => {
   };
 
     exports.updateTaskByTaskId = async (req, res) => {
-        // const taskId = req.params.taskId;
-        const { name, description, priority, startDate, endDate, isComplete, creationDate, taskId } = req.body;
+        const id = req.params.id;
+        const { name, description, priority, startDate, endDate, isComplete, creationDate } = req.body;
         try {
-          connectDB();
-          const task = await Task.findOneAndUpdate  ({ taskId }, 
+          
+          const task = await Task.findByIdAndUpdate(id , 
             { name, description, priority, startDate, endDate, isComplete, creationDate},
              { new: true });
             if (!task) {
@@ -106,11 +106,11 @@ exports.addTask = async (req, res) => {
     }
 
     exports.updateCompletionByTaskId = async (req, res) => {
-        // const taskId = req.params.taskId;
-        const { taskId } = req.body;
+        const id = req.params.id;
+        // const { taskId } = req.body;
         try {
           connectDB();
-          const task = await Task.findOneAndUpdate  ({ taskId }, 
+          const task = await Task.findByIdAndUpdate( id , 
             {  isComplete : true},
              { new: true });
             if (!task) {

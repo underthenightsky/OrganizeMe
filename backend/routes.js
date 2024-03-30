@@ -9,11 +9,15 @@ const {updateCompletionByTaskId,addTask
 
 router.get('/get-tasks', getTasks);
 router.get('/get-task/:id', getTaskById);
-// router.get('/filter', getTaskById);
+
 router.get('/get-completed', getCompletedTasks);
-router.delete('/delete/:taskId',deleteTaskByTaskId);
-router.put('/update', updateTaskByTaskId);
+router.delete('/delete/:id',deleteTaskByTaskId);
+
+// router.put('/update', updateTaskByTaskId);
+router.put('/update-completion/:id', updateCompletionByTaskId);
+router.put('/update/:id', updateTaskByTaskId);
 
 router.post('/add-task', addTask);
+
 
 module.exports = router;

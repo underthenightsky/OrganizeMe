@@ -5,16 +5,15 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
   priority: {
     type: String,
     enum: ["Medium", "Low","High"],
     required: true,
   },
-  
+  description: {
+    type: String,
+    required: true,
+  },  
   startDate: {
     type: Date,
     required: true,
@@ -39,6 +38,6 @@ const taskSchema = new mongoose.Schema({
 
 });
 
-const Task = mongoose.model("Tasks", taskSchema);
+const Task = mongoose.model("tasks", taskSchema);
 
 module.exports = Task;
