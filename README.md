@@ -17,11 +17,12 @@ Axios: HTTP client for making requests to the backend API.
 React Navigation: Library for handling navigation between screens in the app.
 React Native Gesture Handler: Library for implementing swipe gestures in the expense list.
 Expo: Toolchain for building and deploying React Native apps.
+
 Getting Started
 To run the Expense Tracker App locally, follow these steps:
 
 Clone this repository to your local machine:
-Download files from OrganizeMe-backend, OrganizeMe-frontend , create a folder called OrgnaizeMe and add both these files to them and rename Organizeme-frontend as frontend and the other as backend.
+Download files from OrganizeMe-backend, OrganizeMe-frontend , create a folder called OrgnaizeMe and add both these files to them and rename Organizeme-frontend as frontend and the other as backend. The .env files are jsut for sample , you need create your own .env file.
 
 
 Usage
