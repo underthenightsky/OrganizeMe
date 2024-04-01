@@ -35,9 +35,8 @@ Commands
 npm start: Starts the development server for the frontend.
 npm run server: Starts the backend server.
 
-
-[[Download APK , View Demo Video](url)]([url](url))
-
+[Click to Download APK or see demo video
+](https://drive.google.com/drive/u/0/folders/1qwcLCHBTC6Afp8Sehn_nKp2z-VlWN_os)
 
 Contributing
 Contributions to the organizeMe App are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
